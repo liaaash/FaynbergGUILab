@@ -35,7 +35,7 @@ public class SimpleGUI extends JFrame implements ActionListener, ItemListener, C
     private void init() {
         // setting up the frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 400);
+        setSize(600, 400);
         setLocation(300, 50);
 
         // create the MenuBar and menu components
@@ -88,7 +88,8 @@ public class SimpleGUI extends JFrame implements ActionListener, ItemListener, C
         field = textField;
         JButton sendButton = new JButton("Send");
         JButton resetButton = new JButton("Reset");
-        JButton openButton = new JButton ("Open");
+        JButton openButton = new JButton ("Open ");
+        JButton randomFont = new JButton("Random Font");
 
         // create checkboxes
         checkBox1 = new JCheckBox("Yes");
@@ -105,6 +106,7 @@ public class SimpleGUI extends JFrame implements ActionListener, ItemListener, C
         panel.add(sendButton);
         panel.add(resetButton);
         panel.add(openButton);
+        panel.add(randomFont);
         panel.add(checkBox1);
         panel.add(checkBox2);
 
@@ -127,6 +129,7 @@ public class SimpleGUI extends JFrame implements ActionListener, ItemListener, C
         sendButton.addActionListener(this);
         resetButton.addActionListener(this);
         openButton.addActionListener(this);
+        randomFont.addActionListener(this);
 
         //setting up checkboxes to use ItemListener interface and itemStateChanged method
         checkBox1.addItemListener(this);
@@ -170,8 +173,27 @@ public class SimpleGUI extends JFrame implements ActionListener, ItemListener, C
             field.setText("");
             checkBox1.setSelected(false);
             checkBox2.setSelected(false);
-        } else if (text.equals("Open")) {
-            //new gui2
+        } else if (text.equals("Open ")) {
+            JFrame newF = new JFrame("ok");
+            newF.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            newF.setSize(100, 100);
+            newF.setLocation(300, 50);
+            // create welcome label
+            JLabel l = new JLabel("HELLO!");
+            l.setFont(new Font("Helvetica", Font.BOLD, 20));
+            JPanel p = new JPanel();
+            p.add(l);
+            newF.add(p, BorderLayout.NORTH);
+            newF.setVisible(true);
+        } else if (text.equals("Random Font")) {
+            Font[] fonts = new Font[6];
+            fonts[0] = new Font("Century Gothic", Font.BOLD, 10);
+            fonts[1] = new Font("Courier New", Font.BOLD, 10);
+            fonts[2] = new Font("Futura", Font.BOLD, 10);
+            fonts[3] = new Font("Georgia", Font.BOLD, 10);
+            fonts[4] = new Font("Papyrus", Font.BOLD, 10);
+            fonts[5] = new Font("Lucida Calligraphy", Font.BOLD, 10);
+            area.setFont(fonts[(int) (Math.random() * 6)]);
         } else if (text.equals("FAQ")) {
             field.setText("FAQ");
         } else if (text.equals("About")) {
